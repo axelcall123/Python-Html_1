@@ -16,8 +16,7 @@ else:
 import webbrowser
 
 f = open('holamundo.html','w')
-
-mensaje = """
+principio = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,14 +25,17 @@ mensaje = """
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/css.css">
   <title>Document</title>
-</head><body>"""
-mensaje2= comando
-mensaje3= """
+</head>
+<body>"""
+
+cuerpo= comando
+
+final= """
 </body>
 </html>"""
 
-f.write(mensaje)
-f.write(mensaje2)
-f.write(mensaje3)
+f.write(principio)
+f.write(cuerpo)
+f.write(final)
 f.close()
 webbrowser.open_new_tab('holamundo.html')
