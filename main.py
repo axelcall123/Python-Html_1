@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #--------------------------crea pagina web
 import webbrowser
 #---------------------------carga n archivos
@@ -13,15 +12,12 @@ else:
     print("NEL")
 
 #f = open('holamundo.html','w')
-=======
-# escribe-html-2-windows.py
->>>>>>> master
 
 import webbrowser
 
 f = open('holamundo.html','w')
-<<<<<<< HEAD
-principio = """
+
+mensaje = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,28 +26,14 @@ principio = """
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="css/css.css">
   <title>Document</title>
-</head>
-<body>"""
-
-cuerpo= comando
-
-final= """
+</head><body>"""
+mensaje2= comando
+mensaje3= """
 </body>
 </html>"""
 
-f.write(principio)
-f.write(cuerpo)
-f.write(final)
-f.close()
-=======
-
-mensaje = """<html>
-<head></head>
-<body><p>Holas Mundo!</p></body>
-</html>"""
-
 f.write(mensaje)
+f.write(mensaje2)
+f.write(mensaje3)
 f.close()
-
->>>>>>> master
 webbrowser.open_new_tab('holamundo.html')
