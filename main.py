@@ -1,5 +1,6 @@
 import webbrowser#pagia web
-import os
+import os#URL ABSOLUTA
+import os.path#SI EXISTE FICHERO
 
 salir = True
 url_lista=[]
@@ -20,11 +21,17 @@ while salir==True:
                 url=n_palabra+".json"#AGREGA LA EXTENSION
                 my_path = os.path.abspath(os.path.dirname(__file__))#URL DE CADA ARCHIVO
                 path_1 = os.path.join(my_path, '..\\Python-Html_1\\',url)#URL ABSOLUTA
-                print(path_1)
+
+                if os.path.isfile(path_1)== True:#VALIDAR SI EXISTE EL ARCHIVO
+                    url_lista.append(path_1)#AGREGA URLS DIRECTORIO
+                    print("Url Agregada:", path_1)
+                else:
+                    print("Archivo No Existe: En Esta Carpeta")
             print("cargando...")
 
-
     elif sep_palabras[0] == 'seleccionar':
+
+        #print(url_lista[0:len(url_lista)])
         print("seleccionando...")
     elif sep_palabras[0] == 'maximo':
         print("Calculando Maximo...")
