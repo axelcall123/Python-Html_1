@@ -1,26 +1,34 @@
 import webbrowser#pagia web
 import os#URL ABSOLUTA
 import os.path#SI EXISTE FICHERO
+import json
 
+#--
 salir = True
 url_lista=[]
+atributos=[]
+caracteristicas=[]
+
+
 while salir==True:
     print('Utilice los comandos diponibles')
     #comando = input().upper()#solictar comando
     comando = input().lower()#MINUSCULAS
     separador = ","
     sep_palabras = comando.split(separador)#SEPARAR EN UNA LISTA
+
+
     if sep_palabras[0] == 'cargar':
         if len(sep_palabras)==1:#NO HA SLECCIONADO NINGUN ARCHIVO
             print("No Ha Seleccionado Ningun Archivo")
         else:
             i=1
             for i in range(len(sep_palabras)-1):
-                str1=""#SEPARA LAS PALABRAS
-                n_palabra=str1.join(sep_palabras[i+1])#UNE LA PALBRA Y LA SACA
+                sep_matriz=""#SEPARA LAS PALABRAS
+                n_palabra=sep_matriz.join(sep_palabras[i+1])#UNE LA PALBRA Y LA SACA
                 url=n_palabra+".json"#AGREGA LA EXTENSION
                 my_path = os.path.abspath(os.path.dirname(__file__))#URL DE CADA ARCHIVO
-                path_1 = os.path.join(my_path, '..\\Python-Html_1\\',url)#URL ABSOLUTA
+                path_1 = os.path.join(my_path, '../Python-Html_1/',url)#URL ABSOLUTA
 
                 if os.path.isfile(path_1)== True:#VALIDAR SI EXISTE EL ARCHIVO
                     url_lista.append(path_1)#AGREGA URLS DIRECTORIO
@@ -28,11 +36,27 @@ while salir==True:
                 else:
                     print("Archivo No Existe: En Esta Carpeta")
             print("cargando...")
+                
 
     elif sep_palabras[0] == 'seleccionar':
-
-        #print(url_lista[0:len(url_lista)])
+        with open(url_lista[0],'r') as miarchivo:
+            datos=miarchivo.read()
+        objeto=json.loads(datos)
+        print(objeto)
+        for d in objeto:
+            print(d)
+            print(type(d))
+            id_items=d.id_items()
+            for id in id_items:
+                atributos.append(id[0]), caracteristicas.append(id[1])
+            
+            #keys = d.keys() obtiene los nombres
+            #values=d.values() obtiene los atributos
+            #print(keys,":::::::",values)
+        
         print("seleccionando...")
+
+        
     elif sep_palabras[0] == 'maximo':
         print("Calculando Maximo...")
     elif sep_palabras[0] == 'minimo':
@@ -47,8 +71,6 @@ while salir==True:
         salir = False
     else:
         print("Otras Opciones")
-
-
 
 f = open('holamundo.html','w')#nombre documento pagina web
 
