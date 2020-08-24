@@ -9,6 +9,17 @@ url_lista=[]
 atributos=[]
 caracteristicas=[]
 
+def selccionando():
+    with open(url_lista[0],'r') as miarchivo:
+            datos=miarchivo.read()
+    objeto=json.loads(datos)
+    for d in objeto:
+    #SEPARA POR ATRIBUTOS: CARACTERISTICAS
+        items = d.items()
+        for id_item in items:
+            atributos.append(id_item[0]), caracteristicas.append(id_item[1])#OBTIENE NOMBRE:"ALEX"  
+            #keys = d.keys() obtiene los nombres,#values=d.values() obtiene los atributos,#print(keys,":::::::",values)
+        print(str(atributos),":::",str(caracteristicas))
 
 while salir==True:
     print('Utilice los comandos diponibles')
@@ -16,16 +27,16 @@ while salir==True:
     comando = input().lower()#MINUSCULAS
     separador = ","
     sep_palabras = comando.split(separador)#SEPARAR EN UNA LISTA
-
+    
 
     if sep_palabras[0] == 'cargar':
         if len(sep_palabras)==1:#NO HA SLECCIONADO NINGUN ARCHIVO
             print("No Ha Seleccionado Ningun Archivo")
         else:
-            i=1
-            for i in range(len(sep_palabras)-1):
+            id_urls=1
+            for id_urls in range(len(sep_palabras)-1):
                 sep_matriz=""#SEPARA LAS PALABRAS
-                n_palabra=sep_matriz.join(sep_palabras[i+1])#UNE LA PALBRA Y LA SACA
+                n_palabra=sep_matriz.join(sep_palabras[id_urls+1])#UNE LA PALBRA Y LA SACA
                 url=n_palabra+".json"#AGREGA LA EXTENSION
                 my_path = os.path.abspath(os.path.dirname(__file__))#URL DE CADA ARCHIVO
                 path_1 = os.path.join(my_path, '../Python-Html_1/',url)#URL ABSOLUTA
@@ -35,28 +46,12 @@ while salir==True:
                     print("Url Agregada:", path_1)
                 else:
                     print("Archivo No Existe: En Esta Carpeta")
-            print("cargando...")
                 
-
-    elif sep_palabras[0] == 'seleccionar':
-        with open(url_lista[0],'r') as miarchivo:
-            datos=miarchivo.read()
-        objeto=json.loads(datos)
-        print(objeto)
-        for d in objeto:
-            print(d)
-            print(type(d))
-            id_items=d.id_items()
-            for id in id_items:
-                atributos.append(id[0]), caracteristicas.append(id[1])
             
-            #keys = d.keys() obtiene los nombres
-            #values=d.values() obtiene los atributos
-            #print(keys,":::::::",values)
+    elif sep_palabras[0] == 'seleccionar':
+        selccionando()
         
-        print("seleccionando...")
 
-        
     elif sep_palabras[0] == 'maximo':
         print("Calculando Maximo...")
     elif sep_palabras[0] == 'minimo':
