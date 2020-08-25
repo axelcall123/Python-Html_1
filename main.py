@@ -26,27 +26,40 @@ def seleccionando():
     atri_cara.append(caracteristicas)
     return atri_cara
 
+def atributoxxx(str):
+    #TRANSFORMANDO
+    ayuda=seleccionando()
+    atri=ayuda[0]
+    carac=ayuda[1]
+    for i in range(len(atri)-1):#CICLO PARA NOMBRE:AXEL
+        if atri[i]==str:
+            if str=='nombre':
+                print(str(atri[i]),'=','"',str(carac[i]),'"')
+            else:
+                print(str(atri[i]),'=',str(carac[i]))
+
 while salir==True:
     print('Utilice los comandos diponibles')
     #comando = input().upper()#solictar comando
     comando = input().lower()#MINUSCULAS
+    comando=comando+" "#AYUDA A QUE LA MATRIZ SE QUEDE EN 2 DE TAMAÑO, CAUSA ERROR
     separador_coma = ","
-    seprador_espacio=""
-    sep_palabras_coma = comando.split(separador_coma)#SEPARAR EN UNA LISTA
-    
+    seprador_espacio=" "
+    sep_palabras_es= comando.split(seprador_espacio)#SEPARA COMANDO NOMBRE,HOLA,ET
 
-    if sep_palabras_coma[0] == 'cargar':
-        if len(sep_palabras_coma)==1:#NO HA SLECCIONADO NINGUN ARCHIVO
+    sep_palabras_coma = sep_palabras_es[1].split(separador_coma)#SEPARAR EN UNA LISTA LAS OPCIONES ELEGIADAS
+    #print(sep_palabras_coma)
+    
+    if sep_palabras_es[0] == 'cargar':
+        if len(sep_palabras_coma)==0:#NO HA SLECCIONADO NINGUN ARCHIVO
             print("No Ha Seleccionado Ningun Archivo")
         else:
-            id_urls=1
-            for id_urls in range(len(sep_palabras_coma)-1):
+            for id_urls in range(len(sep_palabras_coma)):
                 sep_matriz=""#SEPARA LAS PALABRAS
-                n_palabra=sep_matriz.join(sep_palabras_coma[id_urls+1])#UNE LA PALBRA Y LA SACA
+                n_palabra=sep_matriz.join(sep_palabras_coma[id_urls])#UNE LA PALBRA Y LA SACA
                 url=n_palabra+".json"#AGREGA LA EXTENSION
                 my_path = os.path.abspath(os.path.dirname(__file__))#URL DE CADA ARCHIVO
                 path_1 = os.path.join(my_path, '../Python-Html_1/',url)#URL ABSOLUTA
-
                 if os.path.isfile(path_1)== True:#VALIDAR SI EXISTE EL ARCHIVO
                     url_lista.append(path_1)#AGREGA URLS DIRECTORIO
                     print("Url Agregada:", path_1)
@@ -54,7 +67,7 @@ while salir==True:
                     print("Archivo No Existe: En Esta Carpeta")
                 
             
-    elif sep_palabras_coma[0] == 'seleccionar*':
+    elif sep_palabras_es[0] == 'seleccionar*':
         #TRANSFORMANDO
         ayuda=seleccionando()
         atri=ayuda[0]
@@ -66,17 +79,45 @@ while salir==True:
                 print(str(atri[i]),'=','"',str(carac[i]),'"')#IMP EN PANTALLA NOMBRE="HOLA"
             else:
                 print(str(atri[i]),'=',str(carac[i]))#IMP EDAD=15
-    elif sep_palabras_coma[0] == 'maximo':
+    
+
+    elif sep_palabras_es[0] == 'seleccionar':
+        #TRANSFORMANDO
+        for id in range(len(sep_palabras_coma)):
+            if str(sep_palabras_coma[id])=='nombre':
+                atributoxxx("nombre")
+                print('nombre')
+            elif str(sep_palabras_coma[id])=='edad':
+                print('edad')
+            elif str(sep_palabras_coma[id])=='activo':
+                print('activo')
+            elif str(sep_palabras_coma[id])=='promedio':
+                print('promedio')
+            
+        print("xd...")
+
+
+    elif sep_palabras_es[0] == 'maximo':
         print("Calculando Maximo...")
-    elif sep_palabras_coma[0] == 'minimo':
+
+
+    elif sep_palabras_es[0] == 'minimo':
         print("Calculando Minimo...")
-    elif sep_palabras_coma[0] == 'suma':
+
+
+    elif sep_palabras_es[0] == 'suma':
         print("Sumando...")
-    elif sep_palabras_coma[0] == 'cuenta':
+
+
+    elif sep_palabras_es[0] == 'cuenta':
         print("Calculando Cuenta...")
-    elif sep_palabras_coma[0] == 'reportar':
+
+
+    elif sep_palabras_es[0] == 'reportar':
         print("Generando Html...")
-    elif sep_palabras_coma[0] == 'salir':
+
+
+    elif sep_palabras_es[0] == 'salir':
         salir = False
     else:
         print("Otras Opciones")
