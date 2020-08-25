@@ -6,13 +6,14 @@ import json
 #--
 salir = True
 url_lista=[]
-atributos=[]
-caracteristicas=[]
+
 
 def seleccionando():
-    atri_cara=[]
-    for id_url in range(len(url_lista)):
-        with open(url_lista[id_url],'r') as miarchivo:
+    atri_cara=[]#RETORNAR
+    atributos=[]#NOMBRE,PROEMDIO
+    caracteristicas=[]#AXEL,95
+    for id_url in range(len(url_lista)):#OBTIENE EL URL DE UNA MATRIZ CON URLS
+        with open(url_lista[id_url],'r') as miarchivo:#ABRE EL URL
                 datos=miarchivo.read()
         objeto=json.loads(datos)
         for d in objeto:
@@ -27,24 +28,31 @@ def seleccionando():
     return atri_cara
 
 def atributoxxx(str):
+    atri_cara=[]#RETORNAR
+    atribuos=[]#NOMBRE,PROEMDIO
+    caracteristicas=[]#AXEL,95
     #TRANSFORMANDO
     ayuda=seleccionando()
     atri=ayuda[0]
     carac=ayuda[1]
-    for i in range(len(atri)-1):#CICLO PARA NOMBRE:AXEL
+    for i in range(len(atri)):#CICLO PARA NOMBRE:AXEL
         if atri[i]==str:
-            if str=='nombre':
-                print(str(atri[i]),'=','"',str(carac[i]),'"')
-            else:
-                print(str(atri[i]),'=',str(carac[i]))
+            atribuos.append(atri[i]), caracteristicas.append(carac[i])#MATRIZ 
+            #IMPRIME LAS OPCIONES
+            #if str=='nombre':
+                #print(atri[i],'=','"',carac[i],'"')
+            #else:
+                #print(atri[i],'=',carac[i])
+    atri_cara.append(atribuos), atri_cara.append(caracteristicas)
+    return atri_cara#RETORNA LA MATRIZ
 
 while salir==True:
     print('Utilice los comandos diponibles')
     #comando = input().upper()#solictar comando
     comando = input().lower()#MINUSCULAS
     comando=comando+" "#AYUDA A QUE LA MATRIZ SE QUEDE EN 2 DE TAMAÑO, CAUSA ERROR
-    separador_coma = ","
-    seprador_espacio=" "
+    separador_coma = ","#AYUDASEPARA LAS OPCIONES CON COMAS
+    seprador_espacio=" "#AYUDASEPARA EL COMANDO CON LAS OPCIONES
     sep_palabras_es= comando.split(seprador_espacio)#SEPARA COMANDO NOMBRE,HOLA,ET
 
     sep_palabras_coma = sep_palabras_es[1].split(separador_coma)#SEPARAR EN UNA LISTA LAS OPCIONES ELEGIADAS
@@ -85,17 +93,36 @@ while salir==True:
         #TRANSFORMANDO
         for id in range(len(sep_palabras_coma)):
             if str(sep_palabras_coma[id])=='nombre':
-                atributoxxx("nombre")
-                print('nombre')
-            elif str(sep_palabras_coma[id])=='edad':
-                print('edad')
-            elif str(sep_palabras_coma[id])=='activo':
-                print('activo')
-            elif str(sep_palabras_coma[id])=='promedio':
-                print('promedio')
-            
-        print("xd...")
+                ayuda=atributoxxx("nombre")#FUNCION PARA OBTENER LOS DATOS:DATOS
+                #DIVIDIR EN 2 MATRICES
+                Atributos=ayuda[0]
+                Caracteristica=ayuda[1]
+                for a in range(len( Atributos)):#CICLO IMPRIME
+                    print(Atributos[a],'=','"',Caracteristica[a],'"')
 
+            elif str(sep_palabras_coma[id])=='edad':
+                ayuda=atributoxxx("edad")
+                #DIVIDIR EN 2 MATRICES
+                Atributos=ayuda[0]
+                Caracteristica=ayuda[1]
+                for a in range(len( Atributos)):#CICLO IMPRIME
+                    print(Atributos[a],'=',Caracteristica[a])
+
+            elif str(sep_palabras_coma[id])=='activo':
+                ayuda=atributoxxx("activo")
+                #DIVIDIR EN 2 MATRICES
+                Atributos=ayuda[0]
+                Caracteristica=ayuda[1]
+                for a in range(len( Atributos)):#CICLO IMPRIME
+                    print(Atributos[a],'=',Caracteristica[a])
+
+            elif str(sep_palabras_coma[id])=='promedio':
+                ayuda=atributoxxx("promedio")
+                #DIVIDIR EN 2 MATRICES
+                Atributos=ayuda[0]
+                Caracteristica=ayuda[1]
+                for a in range(len( Atributos)):#CICLO IMPRIME
+                    print(Atributos[a],'=',Caracteristica[a])
 
     elif sep_palabras_es[0] == 'maximo':
         print("Calculando Maximo...")
