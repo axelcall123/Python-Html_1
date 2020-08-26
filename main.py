@@ -20,7 +20,7 @@ def seleccionando():
         #SEPARA POR ATRIBUTOS: CARACTERISTICAS
             items = d.items()
             for id_item in items:
-                atributos.append(id_item[0]), caracteristicas.append(id_item[1])#OBTIENE NOMBRE:"ALEX"  
+                atributos.append(id_item[0]), caracteristicas.append(id_item[1])#OBTIENE NOMBRE:"ALEX"
                 #keys = d.keys() obtiene los nombres,#values=d.values() obtiene los atributos,#print(keys,":::::::",values)
             #print(str(atributos),":::",str(caracteristicas))
     atri_cara.append(atributos)
@@ -37,7 +37,7 @@ def atributoxxx(str):
     carac=ayuda[1]
     for i in range(len(atri)):#CICLO PARA NOMBRE:AXEL
         if atri[i]==str:
-            atribuos.append(atri[i]), caracteristicas.append(carac[i])#MATRIZ 
+            atribuos.append(atri[i]), caracteristicas.append(carac[i])#MATRIZ
             #IMPRIME LAS OPCIONES
             #if str=='nombre':
                 #print(atri[i],'=','"',carac[i],'"')
@@ -57,7 +57,7 @@ while salir==True:
 
     sep_palabras_coma = sep_palabras_es[1].split(separador_coma)#SEPARAR EN UNA LISTA LAS OPCIONES ELEGIADAS
     #print(sep_palabras_coma)
-    
+
     if sep_palabras_es[0] == 'cargar':
         if len(sep_palabras_coma)==0:#NO HA SLECCIONADO NINGUN ARCHIVO
             print("No Ha Seleccionado Ningun Archivo")
@@ -73,8 +73,8 @@ while salir==True:
                     print("Url Agregada:", path_1)
                 else:
                     print("Archivo No Existe: En Esta Carpeta")
-                
-            
+
+
     elif sep_palabras_es[0] == 'seleccionar*':
         #TRANSFORMANDO
         ayuda=seleccionando()
@@ -82,12 +82,12 @@ while salir==True:
         carac=ayuda[1]
         #print("::",str(atri))
         #print("::",str(carac))
-        for i in range(len(atri)-1):#CICLO PARA NOMBRE:AXEL  
+        for i in range(len(atri)-1):#CICLO PARA NOMBRE:AXEL
             if str(atri[i]).lower()=='nombre':#NOMBRE ESTA EN MAYSUCULA
                 print(str(atri[i]),'=','"',str(carac[i]),'"')#IMP EN PANTALLA NOMBRE="HOLA"
             else:
                 print(str(atri[i]),'=',str(carac[i]))#IMP EDAD=15
-    
+
 
     elif sep_palabras_es[0] == 'seleccionar':
         #TRANSFORMANDO
@@ -125,15 +125,39 @@ while salir==True:
                     print(Atributos[a],'=',Caracteristica[a])
 
     elif sep_palabras_es[0] == 'maximo':
-        print("Calculando Maximo...")
-
+        if str(sep_palabras_coma[0])=='edad':
+            ayuda=atributoxxx("edad")#FUNCION PARA OBTENER LOS DATOS:DATOS
+            #DIVIDIR EN 2 MATRICES
+            Caracteristica=ayuda[1]
+            Caracteristica.sort()
+            print('edad = ',Caracteristica[len(Caracteristica)-1])
+        #--------------------
+    elif str(sep_palabras_coma[0])=='promedio':
+            ayuda=atributoxxx("promedio")#FUNCION PARA OBTENER LOS DATOS:DATOS
+            #DIVIDIR EN 2 MATRICES
+            Caracteristica=ayuda[1]
+            Caracteristica.sort()
+            print('promedio = ',Caracteristica[len(Caracteristica)-1])
 
     elif sep_palabras_es[0] == 'minimo':
-        print("Calculando Minimo...")
-
+        if str(sep_palabras_coma[0])=='edad':
+            ayuda=atributoxxx("edad")#FUNCION PARA OBTENER LOS DATOS:DATOS
+            #DIVIDIR EN 2 MATRICES
+            Caracteristica=ayuda[1]
+            Caracteristica.sort()
+            print('edad = ',Caracteristica[0])
+        #--------------------
+    elif str(sep_palabras_coma[0])=='promedio':
+            ayuda=atributoxxx("promedio")#FUNCION PARA OBTENER LOS DATOS:DATOS
+            #DIVIDIR EN 2 MATRICES
+            Caracteristica=ayuda[1]
+            Caracteristica.sort()
+            print('promedio = ',Caracteristica[0])
 
     elif sep_palabras_es[0] == 'suma':
-        print("Sumando...")
+        if str(sep_palabras_coma[0])=='edad':
+            suma=0
+            print("Sumando...")
 
 
     elif sep_palabras_es[0] == 'cuenta':
