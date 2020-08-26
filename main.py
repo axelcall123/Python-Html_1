@@ -136,7 +136,7 @@ while salir==True:
             ayuda=atributoxxx("promedio")#FUNCION PARA OBTENER LOS DATOS:DATOS
             #DIVIDIR EN 2 MATRICES
             Caracteristica=ayuda[1]
-            Caracteristica.sort()
+            Caracteristica.sort()#ORDENA LA MATRIZ
             print('promedio = ',Caracteristica[len(Caracteristica)-1])
 
     elif sep_palabras_es[0] == 'minimo':
@@ -144,28 +144,61 @@ while salir==True:
             ayuda=atributoxxx("edad")#FUNCION PARA OBTENER LOS DATOS:DATOS
             #DIVIDIR EN 2 MATRICES
             Caracteristica=ayuda[1]
-            Caracteristica.sort()
+            Caracteristica.sort()#ORDENA LA MATRIZ
             print('edad = ',Caracteristica[0])
         #--------------------
     elif str(sep_palabras_coma[0])=='promedio':
             ayuda=atributoxxx("promedio")#FUNCION PARA OBTENER LOS DATOS:DATOS
             #DIVIDIR EN 2 MATRICES
             Caracteristica=ayuda[1]
-            Caracteristica.sort()
+            Caracteristica.sort()#ORDENA LA MATRIZ
             print('promedio = ',Caracteristica[0])
+
 
     elif sep_palabras_es[0] == 'suma':
         if str(sep_palabras_coma[0])=='edad':
             suma=0
-            print("Sumando...")
+            ayuda=atributoxxx("edad")
+            Caracteristica=ayuda[1]
+            for id in range(len(Caracteristica)):#CICLO PARA LA SUMA
+                suma=suma+Caracteristica[id]
+            print("La Suma es: ",suma)
+        if str(sep_palabras_coma[0])=='promedio':
+            suma=0
+            ayuda=atributoxxx("promedio")
+            Caracteristica=ayuda[1]
+            for id in range(len(Caracteristica)):#CICLO PARA LA SUMA
+                suma=suma+Caracteristica[id]
+            print("La Suma es: ",suma)
 
 
     elif sep_palabras_es[0] == 'cuenta':
-        print("Calculando Cuenta...")
+        ayuda=seleccionando()
+        atri=ayuda[0]
+        print("Numero de resitros es: ",len(atri))
 
 
     elif sep_palabras_es[0] == 'reportar':
-        print("Generando Html...")
+        f = open('holamundo.html','w')#nombre documento pagina web
+        principal = """
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <link rel="stylesheet" href="css/css.css">
+          <title>Document</title>
+        </head><body>"""
+        cuerpo= comando
+        fin= """
+        </body>
+        </html>"""
+        f.write(principal)#inicio
+        f.write(cuerpo)#medio
+        f.write(fin)#final
+        f.close()#cerar
+        webbrowser.open_new_tab('holamundo.html')#generar
 
 
     elif sep_palabras_es[0] == 'salir':
@@ -173,25 +206,4 @@ while salir==True:
     else:
         print("Otras Opciones")
 
-f = open('holamundo.html','w')#nombre documento pagina web
 
-principal = """
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="css/css.css">
-  <title>Document</title>
-</head><body>"""
-cuerpo= comando
-fin= """
-</body>
-</html>"""
-
-f.write(principal)#inicio
-f.write(cuerpo)#medio
-f.write(fin)#final
-f.close()#cerar
-webbrowser.open_new_tab('holamundo.html')#generar
