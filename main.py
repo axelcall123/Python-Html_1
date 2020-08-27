@@ -55,8 +55,15 @@ while salir==True:
     seprador_espacio=" "#AYUDASEPARA EL COMANDO CON LAS OPCIONES
     sep_palabras_es= comando.split(seprador_espacio)#SEPARA COMANDO NOMBRE,HOLA,ET
 
-    sep_palabras_coma = sep_palabras_es[1].split(separador_coma)#SEPARAR EN UNA LISTA LAS OPCIONES ELEGIADAS
+    union=''#UNIR MATRIZ DATA1,DATA2
+    unir_matriz='' #UNIR TODA LA MATRIZ
+    for id in range(1,len(sep_palabras_es)):#
+        union=union+unir_matriz.join(sep_palabras_es[id])
+    sep_palabras_coma = union.split(separador_coma)#SEPARAR EN UNA LISTA LAS OPCIONES ELEGIADAS
+
+    print(sep_palabras_es)
     #print(sep_palabras_coma)
+
 
     if sep_palabras_es[0] == 'cargar':
         if len(sep_palabras_coma)==0:#NO HA SLECCIONADO NINGUN ARCHIVO
