@@ -27,6 +27,8 @@ def seleccionando():
     atri_cara.append(caracteristicas)
     return atri_cara
 
+
+
 def atributoxxx(str):
     atri_cara=[]#RETORNAR
     atribuos=[]#NOMBRE,PROEMDIO
@@ -46,6 +48,42 @@ def atributoxxx(str):
     atri_cara.append(atribuos), atri_cara.append(caracteristicas)
     return atri_cara#RETORNA LA MATRIZ
 
+def ReportHtml(numero):
+    atri_cara=[]#RETORNAR
+    atributos=[]#NOMBRE,PROEMDIO
+    caracteristicas=[]#AXEL,95
+    with open(url_lista[numero],'r') as miarchivo:#ABRE EL URL POSICION 
+        datos=miarchivo.read()
+    objeto=json.loads(datos)
+    for d in objeto:
+        items = d.items()
+        for id_item in items:
+            atributos.append(id_item[0]), caracteristicas.append(id_item[1])              
+    atri_cara.append(atributos)
+    atri_cara.append(caracteristicas)
+    return atri_cara
+
+def html(numero):
+    texto=''
+    DiContI="""
+        <div class="container">
+            <div class="row">
+    """
+    DiCe="""</div>"""
+
+    Di12I="""
+                <div class="col-md-12" >
+    """
+    Di4I="""
+                <div class="col-md-3" class="divs">
+    """
+    HR='<hr>'
+    ayuda=ReportHtml(numero)
+    atri=ayuda[0]
+    carac=ayuda[1]
+    texto=DiContI       +Di12I+'#1'+DiCe    +Di4I+str(atri[0]).upper()+HR+str(carac[0])+DiCe+ Di4I+str(atri[1]).upper()+HR+str(carac[1])+DiCe+ Di4I+str(atri[2]).upper()+HR+str(carac[2])+DiCe+ Di4I+str(atri[3]).upper()+HR+str(carac[3])+DiCe+   DiCe+DiCe
+    return texto
+
 while salir==True:
     print('Utilice los comandos diponibles')
     #comando = input().upper()#solictar comando
@@ -54,15 +92,13 @@ while salir==True:
     separador_coma = ","#AYUDASEPARA LAS OPCIONES CON COMAS
     seprador_espacio=" "#AYUDASEPARA EL COMANDO CON LAS OPCIONES
     sep_palabras_es= comando.split(seprador_espacio)#SEPARA COMANDO NOMBRE,HOLA,ET
-
     union=''#UNIR MATRIZ DATA1,DATA2
     unir_matriz='' #UNIR TODA LA MATRIZ
     for id in range(1,len(sep_palabras_es)):#
         union=union+unir_matriz.join(sep_palabras_es[id])
     sep_palabras_coma = union.split(separador_coma)#SEPARAR EN UNA LISTA LAS OPCIONES ELEGIADAS
-
-    print(sep_palabras_es)
-    #print(sep_palabras_coma)
+    print(sep_palabras_es,' espacios')
+    print(sep_palabras_coma,' comas')
 
 
     if sep_palabras_es[0] == 'cargar':
@@ -131,6 +167,7 @@ while salir==True:
                 for a in range(len( Atributos)):#CICLO IMPRIME
                     print(Atributos[a],'=',Caracteristica[a])
 
+
     elif sep_palabras_es[0] == 'maximo':
         if str(sep_palabras_coma[0])=='edad':
             ayuda=atributoxxx("edad")#FUNCION PARA OBTENER LOS DATOS:DATOS
@@ -138,13 +175,14 @@ while salir==True:
             Caracteristica=ayuda[1]
             Caracteristica.sort()
             print('edad = ',Caracteristica[len(Caracteristica)-1])
-        #--------------------
-    elif str(sep_palabras_coma[0])=='promedio':
+
+        elif str(sep_palabras_coma[0])=='promedio':
             ayuda=atributoxxx("promedio")#FUNCION PARA OBTENER LOS DATOS:DATOS
             #DIVIDIR EN 2 MATRICES
             Caracteristica=ayuda[1]
             Caracteristica.sort()#ORDENA LA MATRIZ
             print('promedio = ',Caracteristica[len(Caracteristica)-1])
+
 
     elif sep_palabras_es[0] == 'minimo':
         if str(sep_palabras_coma[0])=='edad':
@@ -153,8 +191,8 @@ while salir==True:
             Caracteristica=ayuda[1]
             Caracteristica.sort()#ORDENA LA MATRIZ
             print('edad = ',Caracteristica[0])
-        #--------------------
-    elif str(sep_palabras_coma[0])=='promedio':
+
+        elif str(sep_palabras_coma[0])=='promedio':
             ayuda=atributoxxx("promedio")#FUNCION PARA OBTENER LOS DATOS:DATOS
             #DIVIDIR EN 2 MATRICES
             Caracteristica=ayuda[1]
@@ -197,9 +235,23 @@ while salir==True:
           <link rel="stylesheet" href="css/css.css">
           <title>Document</title>
         </head><body>"""
-        cuerpo= comando
+        cuerpo=''
+        f = open('holamundo.html','w')#nombre documento pagina web
+        principal = """
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <link rel="stylesheet" href="boos/bootstrap.css">
+          <link rel="stylesheet" href="css/css.css">
+          <title>Document</title>
+        </head><body>"""
+        cuerpo=cuerpo+html(1)
         fin= """
         </body>
+        <script src="boos/bootstrap.js"></script>
         </html>"""
         f.write(principal)#inicio
         f.write(cuerpo)#medio
@@ -211,6 +263,6 @@ while salir==True:
     elif sep_palabras_es[0] == 'salir':
         salir = False
     else:
-        print("Otras Opciones")
+        print("No ha escrito el comando bien")
 
 
