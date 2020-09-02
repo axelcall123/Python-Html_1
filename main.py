@@ -8,7 +8,7 @@ salir = True
 url_lista=[]
 
 
-def seleccionando():
+def seleccionando():#GENERA Y SPARA CARC Y ATRIBUTOS POR URL
     atri_cara=[]#RETORNAR
     atributos=[]#NOMBRE,PROEMDIO
     caracteristicas=[]#AXEL,95
@@ -25,11 +25,10 @@ def seleccionando():
             #print(str(atributos),":::",str(caracteristicas))
     atri_cara.append(atributos)
     atri_cara.append(caracteristicas)
-    return atri_cara
+    return atri_cara#RETORNA
 
 
-
-def atributoxxx(str):
+def atributoxxx(str):#MATRIZ SEPARA LAS N URLS POR SOLO NOMBRE EDAD ACTIVO PROMEDIO
     atri_cara=[]#RETORNAR
     atribuos=[]#NOMBRE,PROEMDIO
     caracteristicas=[]#AXEL,95
@@ -48,7 +47,7 @@ def atributoxxx(str):
     atri_cara.append(atribuos), atri_cara.append(caracteristicas)
     return atri_cara#RETORNA LA MATRIZ
 
-def ReportHtml(numero):
+def ReportHtml(numero):#SEPARAR SOLO POR EL NUMERO DEL REPORTE
     atri_cara=[]#RETORNAR
     atributos=[]#NOMBRE,PROEMDIO
     caracteristicas=[]#AXEL,95
@@ -63,8 +62,13 @@ def ReportHtml(numero):
     atri_cara.append(caracteristicas)
     return atri_cara
 
-def html(numero):
+def html(numero):#CREA REPORTE
     texto=''
+    nombre=[]
+    edad=[]
+    activo=[]
+    promedio=[]
+
     DiContI="""
         <div class="container">
             <div class="row">
@@ -81,24 +85,36 @@ def html(numero):
     ayuda=ReportHtml(numero)
     atri=ayuda[0]
     carac=ayuda[1]
-    texto=DiContI       +Di12I+'#1'+DiCe    +Di4I+str(atri[0]).upper()+HR+str(carac[0])+DiCe+ Di4I+str(atri[1]).upper()+HR+str(carac[1])+DiCe+ Di4I+str(atri[2]).upper()+HR+str(carac[2])+DiCe+ Di4I+str(atri[3]).upper()+HR+str(carac[3])+DiCe+   DiCe+DiCe
+    for a in range(len(atri)):#DIVIDE EN NOMBRE EDAD ACTIVO PROMEDIO
+        if str(atri[a])=='nombre':
+            nombre.append(carac[a])
+        elif str(atri[a])=='edad':
+            edad.append(carac[a])
+        elif str(atri[a])=='activo':
+            activo.append(carac[a])
+        elif str(atri[a])=='promedio':
+            promedio.append(carac[a])
+    print(nombre, edad, activo, promedio)
+    for ids in range(len(nombre)):#UNA GRAN LINEA DE CODIGO
+        texto=texto+DiContI       +Di12I+'REPORTE#'+str(numero+1)+'.'+str(ids+1)+DiCe                   +Di4I+'NOMBRE'+HR+str(nombre[ids])+DiCe+ Di4I+'EDAD'+HR+str(edad[ids])+DiCe+ Di4I+'ACTIVO'+HR+str(activo[ids])+DiCe+Di4I+ 'PROMEDIO'+HR+str(promedio[ids])+DiCe+   DiCe+DiCe
+    #texto=DiContI       +Di12I+'REPORTE#'+str(numero+1)+DiCe    +Di4I+str(atri[0]).upper()+HR+str(carac[0])+DiCe+ Di4I+str(atri[1]).upper()+HR+str(carac[1])+DiCe+ Di4I+str(atri[2]).upper()+HR+str(carac[2])+DiCe+ Di4I+str(atri[3]).upper()+HR+str(carac[3])+DiCe+   DiCe+DiCe#CODIDO GRID NOMBRE,EDAD ..
     return texto
 
 while salir==True:
     print('Utilice los comandos diponibles')
     #comando = input().upper()#solictar comando
     comando = input().lower()#MINUSCULAS
-    comando=comando+" "#AYUDA A QUE LA MATRIZ SE QUEDE EN 2 DE TAMAÑO, CAUSA ERROR
+    comando=comando+" "#AYUDA A QUE LA MATRIZ SE QUEDE EN 2 DE TAMAÑO, NO CAUSE ERROR EL COMANDO DE LAS 2DA OPCION
     separador_coma = ","#AYUDASEPARA LAS OPCIONES CON COMAS
     seprador_espacio=" "#AYUDASEPARA EL COMANDO CON LAS OPCIONES
     sep_palabras_es= comando.split(seprador_espacio)#SEPARA COMANDO NOMBRE,HOLA,ET
     union=''#UNIR MATRIZ DATA1,DATA2
     unir_matriz='' #UNIR TODA LA MATRIZ
-    for id in range(1,len(sep_palabras_es)):#
+    for id in range(1,len(sep_palabras_es)):#UNE TODO LA MATRIZ NOMBRE,HOLA,ETC
         union=union+unir_matriz.join(sep_palabras_es[id])
-    sep_palabras_coma = union.split(separador_coma)#SEPARAR EN UNA LISTA LAS OPCIONES ELEGIADAS
-    print(sep_palabras_es,' espacios')
-    print(sep_palabras_coma,' comas')
+    sep_palabras_coma = union.split(separador_coma)#SEPARAR EN UNA LISTA LAS OPCIONES ELEGIADAS 'NOMBRE' 'EDAD' 'ETC'
+    #print(sep_palabras_es,' espacios')
+    # print(sep_palabras_coma,' comas')
 
 
     if sep_palabras_es[0] == 'cargar':
@@ -112,7 +128,7 @@ while salir==True:
                 my_path = os.path.abspath(os.path.dirname(__file__))#URL DE CADA ARCHIVO
                 path_1 = os.path.join(my_path, '../Python-Html_1/',url)#URL ABSOLUTA
                 if os.path.isfile(path_1)== True:#VALIDAR SI EXISTE EL ARCHIVO
-                    url_lista.append(path_1)#AGREGA URLS DIRECTORIO
+                    url_lista.append(path_1)#AGREGA URLS A LA MATRIZ
                     print("Url Agregada:", path_1)
                 else:
                     print("Archivo No Existe: En Esta Carpeta")
@@ -224,6 +240,11 @@ while salir==True:
 
 
     elif sep_palabras_es[0] == 'reportar':
+        cuerpo=''
+        for id in range(int(sep_palabras_coma[0])):
+            cuerpo=cuerpo+html(id)
+            #print(id)
+
         f = open('holamundo.html','w')#nombre documento pagina web
         principal = """
         <!DOCTYPE html>
@@ -235,7 +256,6 @@ while salir==True:
           <link rel="stylesheet" href="css/css.css">
           <title>Document</title>
         </head><body>"""
-        cuerpo=''
         f = open('holamundo.html','w')#nombre documento pagina web
         principal = """
         <!DOCTYPE html>
@@ -248,13 +268,13 @@ while salir==True:
           <link rel="stylesheet" href="css/css.css">
           <title>Document</title>
         </head><body>"""
-        cuerpo=cuerpo+html(1)
+        cuerpos=cuerpo
         fin= """
         </body>
         <script src="boos/bootstrap.js"></script>
         </html>"""
         f.write(principal)#inicio
-        f.write(cuerpo)#medio
+        f.write(cuerpos)#medio
         f.write(fin)#final
         f.close()#cerar
         webbrowser.open_new_tab('holamundo.html')#generar
