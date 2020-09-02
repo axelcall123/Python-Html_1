@@ -134,7 +134,7 @@ while salir==True:
                     print("Archivo No Existe: En Esta Carpeta")
 
 
-    elif sep_palabras_es[0] == 'seleccionar*':
+    elif sep_palabras_es[0] == 'seleccionar' and sep_palabras_coma[0]=='*':
         if len(url_lista)==0:
             print('No Hay Archivos')
         else:##########################SI NO HA SELECCIONANDO UN ARCHIVO
