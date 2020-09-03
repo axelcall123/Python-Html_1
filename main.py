@@ -254,7 +254,7 @@ while salir==True:
         else:##########################SI NO HA SELECCIONANDO UN ARCHIVO
             ayuda=seleccionando()
             atri=ayuda[0]
-            print("Numero de resitros es: ",len(atri)/4)
+            print("Numero de resitros es: ",len(url_lista))
 
 
     elif sep_palabras_es[0] == 'reportar':
@@ -263,7 +263,7 @@ while salir==True:
         else:##########################SI NO HA SELECCIONANDO UN ARCHIVO
             cuerpo=''
 
-            if id<=int(sep_palabras_coma[0]):
+            if id< int(sep_palabras_coma[0]):
                 print('Numero Es Mayor Que Los Registros')
             else:
                 for id in range(int(sep_palabras_coma[0])):
