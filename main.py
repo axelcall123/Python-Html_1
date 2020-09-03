@@ -263,7 +263,7 @@ while salir==True:
         else:##########################SI NO HA SELECCIONANDO UN ARCHIVO
             cuerpo=''
 
-            if id< int(len(sep_palabras_coma[0])):
+            if int(sep_palabras_coma)> len(url_lista):
                 print('Numero Es Mayor Que Los Registros')
             else:
                 for id in range(int(sep_palabras_coma[0])):
