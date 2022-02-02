@@ -263,15 +263,13 @@ while salir==True:
         else:##########################SI NO HA SELECCIONANDO UN ARCHIVO
             cuerpo=''
 
-            if int(sep_palabras_coma[0])> len(url_lista):
-                print('Numero Es Mayor Que Los Registros')
-            else:
-                for id in range(int(sep_palabras_coma[0])):
-                    cuerpo=cuerpo+html(id)
-                    #print(id)
+            print('Numero Es Mayor Que Los Registros')
+            for id in range(int(sep_palabras_coma[0])):
+                cuerpo=cuerpo+html(id)
+                        #print(id)
 
-                f = open('holamundo.html','w')#nombre documento pagina web
-                principal = """
+            f = open('holamundo.html','w')#nombre documento pagina web
+            principal = """
                 <!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -281,8 +279,8 @@ while salir==True:
                   <link rel="stylesheet" href="css/css.css">
                   <title>Document</title>
                 </head><body>"""
-                f = open('holamundo.html','w')#nombre documento pagina web
-                principal = """
+            f = open('holamundo.html','w')#nombre documento pagina web
+            principal = """
                 <!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -293,16 +291,16 @@ while salir==True:
                   <link rel="stylesheet" href="css/css.css">
                   <title>Document</title>
                 </head><body>"""
-                cuerpos=cuerpo
-                fin= """
+            cuerpos=cuerpo
+            fin= """
                 </body>
                 <script src="boos/bootstrap.js"></script>
                 </html>"""
-                f.write(principal)#inicio
-                f.write(cuerpos)#medio
-                f.write(fin)#final
-                f.close()#cerar
-                webbrowser.open_new_tab('holamundo.html')#generar
+            f.write(principal)#inicio
+            f.write(cuerpos)#medio
+            f.write(fin)#final
+            f.close()#cerar
+            webbrowser.open_new_tab('holamundo.html')#generar
 
 
     elif sep_palabras_es[0] == 'salir':
